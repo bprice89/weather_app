@@ -19,17 +19,18 @@ def index(request):
     weather_data = []
 
     for city in cities:
-
-        city_weather = requests.get(url.format(city)).json() #request the API data and convert the JSON to Python data types format is allowing us to insert any city we want
-        
-        weather = {
-            'city': city,
-            'temp': city_weather['main']['temp'],
-            'description': city_weather['weather'][0]['description'],
-            'icon': city_weather['weather'][0]['icon']
-        }
-
-        weather_data.append(weather)
+        try:
+            city_weather = requests.get(url.format(city)).json() #request the API data and convert the JSON to Python data types format is allowing us to insert any city we want
+            
+            weather = {
+                'city': city,
+                'temp': city_weather['main']['temp'],
+                'description': city_weather['weather'][0]['description'],
+                'icon': city_weather['weather'][0]['icon']
+            }
+        except:
+            print("please input valid city")
+            weather_data.append(weather)
 
     context = {'weather_data': weather_data, 'form': form}
 
