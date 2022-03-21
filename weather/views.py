@@ -28,9 +28,10 @@ def index(request):
                 'description': city_weather['weather'][0]['description'],
                 'icon': city_weather['weather'][0]['icon']
             }
+        
+            weather_data.append(weather)
         except:
             print("please input valid city")
-            weather_data.append(weather)
 
     context = {'weather_data': weather_data, 'form': form}
 
